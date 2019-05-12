@@ -1,0 +1,63 @@
+$pageSpinCubeWidth: 1000px !default;
+
+.pagespin {
+  $translationLength: $pageSpinCubeWidth / 2;
+
+  position: relative;
+  margin: 0 auto;
+  width: $pageSpinCubeWidth;
+  perspective: $pageSpinCubeWidth * 2;
+
+  div {
+    transform-style: preserve-3d;
+  }
+
+  .previous,
+  .current,
+  .next {
+    position: absolute;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 1s;
+   }
+
+  .previous {
+    transform: rotateY(-180deg) translateZ($translationLength);
+  }
+
+  .current {
+    opacity: 1;
+    transform: rotateY(0deg) translateZ($translationLength);
+  }
+
+  .next {
+    transform: rotateY(180deg) translateZ($translationLength);
+  }
+
+  .show-previous,
+  .show-next {
+    transition: transform 1s;
+
+    .current {
+      opacity: 0;
+    }
+  }
+
+  .show-previous .previous,
+  .show-next .next {
+    opacity: 1;
+  }
+
+  .show-previous {
+    transform: translateZ(-$translationLength) rotateY(180deg);
+  }
+
+  .show-current {
+    transition: transform 0s;
+    transform: translateZ(-$translationLength) rotateY(0deg);
+  }
+
+  .show-next {
+    transform: translateZ(-$translationLength) rotateY(-180deg);
+  }
+}
